@@ -32,6 +32,7 @@
     "@types/supertest": "^2.0.4",
     "husky": "^1.0.0-rc.12",
     "jest": "^21.2.1",
+    "lint-staged": "^7.2.0",
     "nodemon": "^1.14.1",
     "prettier": "^1.11.1",
     "supertest": "^3.0.0",
