@@ -16,6 +16,17 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "webpack": "webpack --config webpack.config.js"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged && lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.ts": [
+      "tslint --fix",
+      "git add"
+    ]
+  },
   "dependencies": {
     "@nestjs/common": "^5.0.0",
     "@nestjs/core": "^5.0.0",
@@ -32,10 +43,8 @@
     "@types/supertest": "^2.0.4",
     "husky": "^1.0.0-rc.12",
     "jest": "^21.2.1",
-    "lint-staged": "^7.2.0",
     "nodemon": "^1.14.1",
     "prettier": "^1.11.1",
-    "pretty-quick": "^1.6.0",
     "supertest": "^3.0.0",
     "ts-jest": "^21.2.4",
     "ts-loader": "^4.1.0",
