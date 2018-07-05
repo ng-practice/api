@@ -30,7 +30,9 @@
   "dependencies": {
     "@nestjs/common": "^5.0.0",
     "@nestjs/core": "^5.0.0",
+    "@types/node-json-db": "^0.0.1",
     "fastify-formbody": "^2.0.0",
+    "node-json-db": "^0.7.5",
     "reflect-metadata": "^0.1.12",
     "rxjs": "^6.0.0",
     "typescript": "^2.6.2"
@@ -43,8 +45,10 @@
     "@types/supertest": "^2.0.4",
     "husky": "^1.0.0-rc.12",
     "jest": "^21.2.1",
+    "lint-staged": "^7.2.0",
     "nodemon": "^1.14.1",
     "prettier": "^1.11.1",
+    "pretty-quick": "^1.6.0",
     "supertest": "^3.0.0",
     "ts-jest": "^21.2.4",
     "ts-loader": "^4.1.0",
