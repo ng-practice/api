@@ -19,7 +19,7 @@ export class TasksController {
   }
 
   @Get(':guid')
-  single(guid: string) {
+  single(@Param('guid') guid: string) {
     return this._tasks.getSingle(guid);
   }
 
@@ -29,27 +29,27 @@ export class TasksController {
   }
 
   @Delete(':guid')
-  remove(@Param() guid: string) {
+  remove(@Param('guid') guid: string) {
     return this._tasks.remove(guid);
   }
 
   @Put('favor/:guid')
-  favor(@Param() guid: string) {
+  favor(@Param('guid') guid: string) {
     return this._tasks.favor(guid);
   }
 
-  @Put('unFavor/:guid')
-  unFavor(@Param() guid: string) {
-    return this._tasks.unFavor(guid);
+  @Put('disfavor/:guid')
+  disfavor(@Param('guid') guid: string) {
+    return this._tasks.disfavor(guid);
   }
 
   @Put('complete/:guid')
-  complete(@Param() guid: string) {
+  complete(@Param('guid') guid: string) {
     return this._tasks.complete(guid);
   }
 
-  @Put('unComplete/:guid')
-  unComplete(@Param() guid: string) {
-    return this._tasks.unComplete(guid);
+  @Put('proceed/:guid')
+  proceed(@Param('guid') guid: string) {
+    return this._tasks.proceed(guid);
   }
 }

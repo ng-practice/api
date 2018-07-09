@@ -26,19 +26,19 @@ export class TasksService {
   }
 
   complete(guid: string) {
-    this._taskDb.push(`/${guid}`, { isCompleted: true }, false);
+    this._taskDb.push(`/${guid}`, { isComplete: true }, false);
   }
 
-  unComplete(guid: string) {
-    this._taskDb.push(`/${guid}`, { isCompleted: false }, false);
+  proceed(guid: string) {
+    this._taskDb.push(`/${guid}`, { isComplete: false }, false);
   }
 
   favor(guid: string) {
-    this._taskDb.push(`/${guid}`, { isFavor: true }, false);
+    this._taskDb.push(`/${guid}`, { isFavorite: true }, false);
   }
 
-  unFavor(guid: string) {
-    this._taskDb.push(`/${guid}`, { isFavor: false }, false);
+  disfavor(guid: string) {
+    this._taskDb.push(`/${guid}`, { isFavorite: false }, false);
   }
 
   remove(guid: string) {
