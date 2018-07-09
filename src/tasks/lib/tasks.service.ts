@@ -26,11 +26,11 @@ export class TasksService {
   }
 
   complete(guid: string) {
-    this._taskDb.push(`/${guid}`, { isDone: true }, false);
+    this._taskDb.push(`/${guid}`, { isCompleted: true }, false);
   }
 
   unComplete(guid: string) {
-    this._taskDb.push(`/${guid}`, { isDone: false }, false);
+    this._taskDb.push(`/${guid}`, { isCompleted: false }, false);
   }
 
   favor(guid: string) {

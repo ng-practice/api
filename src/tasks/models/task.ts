@@ -2,6 +2,6 @@ export interface Task {
   guid: string;
   title: string;
   text: string;
-  isDone: boolean;
+  isCompleted: boolean;
   isFavorite: boolean;
 }
