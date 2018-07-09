@@ -30,6 +30,7 @@
   "dependencies": {
     "@nestjs/common": "^5.0.0",
     "@nestjs/core": "^5.0.0",
+    "@nestjs/swagger": "^2.2.0",
     "@types/node-json-db": "^0.0.1",
     "fastify-formbody": "^2.0.0",
     "node-json-db": "^0.7.5",
