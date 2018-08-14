@@ -5,10 +5,12 @@ import {
   Body,
   Put,
   Param,
-  Delete,
+  Delete
 } from '@nestjs/common';
 import { TasksService } from './lib/tasks.service';
+import { ApiUseTags } from '../../node_modules/@nestjs/swagger';
 
+@ApiUseTags('tasks')
 @Controller('tasks')
 export class TasksController {
   constructor(private _tasks: TasksService) {}
