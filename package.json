@@ -39,7 +39,7 @@
     "typescript": "^2.6.2"
   },
   "devDependencies": {
-    "@nestjs/testing": "^5.0.0",
+    "@nestjs/testing": "^5.1.0",
     "@types/express": "^4.0.39",
     "@types/jest": "^21.1.8",
     "@types/node": "^9.3.0",
@@ -50,6 +50,7 @@
     "nodemon": "^1.14.1",
     "prettier": "^1.11.1",
     "pretty-quick": "^1.6.0",
+    "pure-ts": "^0.10.2",
     "supertest": "^3.0.0",
     "ts-jest": "^21.2.4",
     "ts-loader": "^4.1.0",

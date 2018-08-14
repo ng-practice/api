@@ -37,7 +37,7 @@
     path-to-regexp "^2.2.1"
     swagger-ui-express "^3.0.8"
 
-"@nestjs/testing@^5.0.0":
+"@nestjs/testing@^5.1.0":
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/@nestjs/testing/-/testing-5.1.0.tgz#a8fb8abd415a03bfcc9d6bf55282179a5d708a1f"
   dependencies:
@@ -5288,6 +5288,10 @@ punycode@^1.2.4, punycode@^1.4.1:
 punycode@^2.1.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
+
+pure-ts@^0.10.2:
+  version "0.10.2"
+  resolved "https://registry.yarnpkg.com/pure-ts/-/pure-ts-0.10.2.tgz#b6a1b140599d128418ee55c838766ba620fe3bb4"
 
 qs@6.5.1:
   version "6.5.1"
