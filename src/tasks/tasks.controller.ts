@@ -1,14 +1,22 @@
 import {
-  Controller,
-  Get,
-  Post,
   Body,
-  Put,
+  Controller,
+  Delete,
+  Get,
+  HttpException,
   Param,
-  Delete
+  Post,
+  Put,
+  UseGuards
 } from '@nestjs/common';
-import { TasksService } from './lib/tasks.service';
+
 import { ApiUseTags } from '../../node_modules/@nestjs/swagger';
+import { GuidGuard } from './lib/guards/guid.guard';
+import { TasksService } from './lib/tasks.service';
+
+function bailOut(err: HttpException) {
+  throw err;
+}
 
 @ApiUseTags('tasks')
 @Controller('tasks')
@@ -20,9 +28,13 @@ export class TasksController {
     return this._tasks.getAll();
   }
 
-  @Get(':guid')
+  @Get(':guid?')
+  @UseGuards(GuidGuard)
   single(@Param('guid') guid: string) {
-    return this._tasks.getSingle(guid);
+    return this._tasks
+      .getSingle(guid)
+      .ifLeft(bailOut)
+      .extract();
   }
 
   @Post()
@@ -30,9 +42,10 @@ export class TasksController {
     return this._tasks.addOne(task);
   }
 
-  @Delete(':guid')
+  @Delete(':guid?')
+  @UseGuards(GuidGuard)
   remove(@Param('guid') guid: string) {
-    return this._tasks.remove(guid);
+    return this._tasks.remove(guid).ifLeft(bailOut);
   }
 
   @Put('favor/:guid')
