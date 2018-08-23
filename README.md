@@ -45,7 +45,7 @@ Die Chat-API wird durch eine Websocket-Verbindung genutzt.
 
 #### Mit Websocket API verbinden
 
-Nachdem `npm start` ausgeführt wurde kann unter Angabe [ws://localhost:3000]()
+Nachdem `npm start` ausgeführt wurde kann unter Angabe [ws://localhost:3000](#)
 die Socketverbindung hergestellt werden.
 
 > **Hinweis** Wie genau die Socketverbindung in einem Angular-Projekt
