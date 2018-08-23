@@ -1,17 +1,15 @@
 import {
-  Injectable,
+  BadRequestException,
   HttpException,
-  NotFoundException,
-  BadRequestException
+  Injectable,
+  NotFoundException
 } from '@nestjs/common';
 import JsonDB from 'node-json-db';
+import { Either } from 'pure-ts/adts/Either';
+import { Maybe } from 'pure-ts/adts/Maybe';
 
 import { Task } from '../models/task';
 import { TasksJsonDB } from '../models/tasks-json-db';
-
-import { Maybe } from 'pure-ts/adts/Maybe';
-import { Either } from 'pure-ts/adts/Either';
-import { Validate } from 'pure-ts/utils/Validation';
 
 function tryTo<T>(action: {
   resolve: () => T;
