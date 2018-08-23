@@ -114,6 +114,8 @@ socket.emit('[Chat:Client] Publish message to the channel', message);
 | writtenBy | string |
 | writtenAt | Date   |
 
+> **Hinweis** Wenn eine dieser Eigenschaften nicht übergeben wird, gibt der WebSocket eine Fehlermeldung zurück.
+
 Nachdem die neue Nachricht an den WebSocket-Endpunkt versendet und erfolgreich verarbeitet wurde, wird eine Nachricht an **alle** Clients versendet, um die neue Chat-Nachricht dem Leser präsentieren zu können.
 
 |             |                                                  |
