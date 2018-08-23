@@ -15,8 +15,10 @@ export class ChatMessagesService {
     );
   }
 
-  addOne(message: ChatMessage) {
-    return of(this._db.push(`/${message.guid}`, message)).pipe(mapTo(message));
+  addOne(rawMessage: ChatMessage) {
+    return of(this._db.push(`/${rawMessage.guid}`, rawMessage)).pipe(
+      mapTo(rawMessage)
+    );
   }
 
   removeAll() {

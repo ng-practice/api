@@ -1,3 +1,4 @@
+import { UseGuards } from '@nestjs/common';
 import {
   SubscribeMessage,
   WebSocketGateway,
@@ -9,6 +10,7 @@ import { map, mapTo, tap } from 'rxjs/operators';
 
 import { ChatMessagesService } from './lib/chat-messages.service';
 import { SocketAct } from './lib/contracts/socket-act';
+import { ChatMessageValidator } from './lib/guards/chat-message-validator.guard';
 import { ChatMessage } from './models';
 import { ChatHistoryLoaded, ChatMessageSent } from './models/acts';
 import { ChatClientEvent } from './models/chat-client-event';
@@ -44,6 +46,7 @@ export class ChatGateway {
    * @param message The message containing valuable content. :)
    */
   @SubscribeMessage(ChatClientEvent.PublishSingleMessage)
+  @UseGuards(ChatMessageValidator)
   publishMessage(_: SocketIO.Socket, message: ChatMessage) {
     return this._chatMessages
       .addOne(message)
