@@ -63,7 +63,7 @@ die Socketverbindung hergestellt werden.
 > hergestellt wird, ist in in der [Chat-Aufgabe](https://github.com/ui-bootcamp/bootcamp-schedule/tree/master/05-chat)
 > beschrieben.
 
-#### Chatnachrichten laden
+#### Chatnachrichten anfordern und empfangen
 
 Um früher versendete Chatnachrichten zu laden muss einer geöffnete
 Socketverbindung in `Event Name` übergeben werden.
@@ -114,6 +114,17 @@ socket.emit('[Chat:Client] Publish message to the channel', message);
 | writtenBy | string |
 | writtenAt | Date   |
 
+Nachdem die neue Nachricht an den WebSocket-Endpunkt versendet und erfolgreich verarbeitet wurde, wird eine Nachricht an **alle** Clients versendet, um die neue Chat-Nachricht dem Leser präsentieren zu können.
+
+|             |                                                  |
+| ----------- | ------------------------------------------------ |
+| **Anfrage** | `'[Chat:Client] Publish message to the channel'` |
+| **Antwort** | `'[Chat] A new message has been published'`      |
+
+Wenn es also mehrere geöffnete Chat-Clients gibt und eine dieser
+Clients eine Nachricht publiziert, empfangen alle anderen Clients die neue
+Nachricht, da der Server diese per _Broadcast_ verschickt.
+
 ![Web-Socket-Basic](assets/images/broadcast.png)
 
 #### Chatverlauf löschen
@@ -126,3 +137,13 @@ Nachrichten von Server gelöscht werden.
 // ...
 socket.emit('[Chat:Client] Remove messages from history');
 ```
+
+Wurde die Aufforderung zur Löschung der Chatnachrichten versendet, reagiert
+der Server damit, dass eine leere Liste zurücksendet.
+Der Abonnent, der die Liste der Chatnachrichten verwaltet wird also automatisch
+benachrichtigt, dass es nun keine Nachrichten mehr gibt.
+
+|             |                                                |
+| ----------- | ---------------------------------------------- |
+| **Anfrage** | `'[Chat:Client] Remove messages from history'` |
+| **Antwort** | `'[Chat] All past messages have been loaded'`  |
