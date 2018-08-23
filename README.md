@@ -41,7 +41,18 @@ sich unter http://localhost:3000/api/ eine interaktive Dokumentation.
 
 ### Websocket
 
+![Web-Socket-Basic](assets/images/one-to-one.png)
+
 Die Chat-API wird durch eine Websocket-Verbindung genutzt.
+Das obige Bild zeigt, wie Client und WebSocket miteinander kommunizieren.
+Der Client sendet eine Nachricht.
+Die Nachricht wird durch den Server verarbeitet.
+Nun **kann** der Server in Reaktion eine Nachricht eine Antwort zurücksenden.
+Das ist allerdings nicht zwingend erforderlich.
+Wenn der Client eine Nachricht an einen WebSocket-Endpunkt sendet spricht mann
+von einem `Fire & Forget`, weil der Client nicht direkt auf eine Antwort wartet.
+Der Client kann allerdings bestimmte Nachrichten-Typen vom Server abonnieren
+und verarbeiten, sobald sie eintreffen.
 
 #### Mit Websocket API verbinden
 
@@ -63,6 +74,27 @@ Das folgendes Code Snippet skizziert, wie die Anweisung ausgeführt werden kann.
 socket.emit('[Chat:Client] Load messages from history');
 ```
 
+Die gesendete Nachricht wird durch den Server verarbeitet.
+Anschließend reagiert dieser mit einer eigenen Nachricht, die
+der Client vorab abonnieren muss.
+
+```ts
+// plain socket
+socket.on('[Chat] All past messages have been loaded', callback);
+
+// observable ngx-socket-io
+socket
+  .fromEvent('[Chat] All past messages have been loaded')
+  .pipe
+  // add operators
+  ();
+```
+
+|             |                                               |
+| ----------- | --------------------------------------------- |
+| **Anfrage** | `'[Chat:Client] Load messages from history'`  |
+| **Antwort** | `'[Chat] All past messages have been loaded'` |
+
 #### Chatnachricht senden
 
 Eine Nachricht wird versendet, in dem neben dem `Event Name` eine `Payload`
@@ -81,6 +113,8 @@ socket.emit('[Chat:Client] Publish message to the channel', message);
 | text      | string |
 | writtenBy | string |
 | writtenAt | Date   |
+
+![Web-Socket-Basic](assets/images/broadcast.png)
 
 #### Chatverlauf löschen
 
