@@ -8,33 +8,13 @@ import { Observable } from 'rxjs';
 import { map, mapTo, tap } from 'rxjs/operators';
 
 import { ChatMessagesService } from './lib/chat-messages.service';
+import { SocketAct } from './lib/contracts/socket-act';
 import { ChatMessage } from './models';
-
-export interface SocketAct<T> {
-  event: string;
-  data?: T;
-}
-
-export class MessageSent implements SocketAct<ChatMessage> {
-  readonly event = '[Chat] A new message has been published';
-
-  constructor(public data: ChatMessage) {}
-}
-
-export class ChatHistoryLoaded implements SocketAct<ChatMessage[]> {
-  readonly event = '[Chat] All past messages have been loaded';
-
-  constructor(public data: ChatMessage[]) {}
-}
-
-export enum ChatClientEvent {
-  LoadAllMessages = '[Chat:Client] Load messages from history',
-  RemoveAllMessages = '[Chat:Client] Remove messages from history',
-  PublishSingleMessage = '[Chat:Client] Publish message to the channel'
-}
+import { ChatHistoryLoaded, ChatMessageSent } from './models/acts';
+import { ChatClientEvent } from './models/chat-client-event';
 
 @WebSocketGateway()
-export class MessagesGateway {
+export class ChatGateway {
   @WebSocketServer() server: Server;
 
   constructor(private _chatMessages: ChatMessagesService) {}
@@ -67,7 +47,9 @@ export class MessagesGateway {
   publishMessage(_: SocketIO.Socket, message: ChatMessage) {
     return this._chatMessages
       .addOne(message)
-      .pipe(tap(chatMessage => this.broadCast(new MessageSent(chatMessage))));
+      .pipe(
+        tap(chatMessage => this.broadCast(new ChatMessageSent(chatMessage)))
+      );
   }
 
   /**
