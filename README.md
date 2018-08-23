@@ -85,9 +85,9 @@ socket.on('[Chat] All past messages have been loaded', callback);
 // observable ngx-socket-io
 socket
   .fromEvent('[Chat] All past messages have been loaded')
-  .pipe
-  // add operators
-  ();
+  .pipe(
+    // add operators
+  (;
 ```
 
 |             |                                               |
