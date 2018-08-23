@@ -129,6 +129,12 @@
     "@types/express-serve-static-core" "*"
     "@types/mime" "*"
 
+"@types/socket.io@^1.4.37":
+  version "1.4.37"
+  resolved "https://registry.yarnpkg.com/@types/socket.io/-/socket.io-1.4.37.tgz#adb6604cbec790079700ebd76ba2725adba9d64d"
+  dependencies:
+    "@types/node" "*"
+
 "@types/strip-bom@^3.0.0":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@types/strip-bom/-/strip-bom-3.0.0.tgz#14a8ec3956c2e81edb7520790aecf21c290aebd2"
