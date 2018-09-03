@@ -3,7 +3,7 @@ import { WsException } from '@nestjs/websockets';
 
 @Injectable()
 export class ChatMessageValidator implements CanActivate {
-  mandatoryFields = ['guid', 'author', 'text', 'writtenBy', 'writtenAt'];
+  mandatoryFields = ['guid', 'text', 'writtenBy', 'writtenAt'];
 
   canActivate(context: ExecutionContext) {
     const rawMessage = context.switchToWs().getData();
