@@ -17,7 +17,7 @@ export class ChatMessageValidator implements CanActivate {
   }
 
   private missingFieldMessage(field: string) {
-    `Please provide the field "${field}".\n`;
+    return `Please provide the field "${field}".\n`;
   }
 
   private check(target: object, fields: string[]) {
