@@ -14,13 +14,23 @@ const database = join(__dirname, '..', '..', 'database', 'dashboard', 'media');
   providers: [
     {
       provide: AlbumService,
-      useValue: new AlbumService(new JsonDB(`${database}/albums`, true, true))
+      useFactory(tracks) {
+        return new AlbumService(
+          new JsonDB(`${database}/albums`, true, true),
+          tracks
+        );
+      },
+      inject: [TracksService]
     },
     {
       provide: ArtistsService,
-      useValue: new ArtistsService(
-        new JsonDB(`${database}/artists`, true, true)
-      )
+      useFactory(albums) {
+        return new ArtistsService(
+          new JsonDB(`${database}/artists`, true, true),
+          albums
+        );
+      },
+      inject: [AlbumService]
     },
     {
       provide: TracksService,
