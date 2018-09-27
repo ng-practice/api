@@ -21,7 +21,7 @@ function bailOut(err: HttpException) {
   throw err;
 }
 
-@ApiUseTags('tasks')
+@ApiUseTags('Taskboard')
 @Controller('tasks')
 export class TasksController {
   constructor(private _tasks: TasksService) {}

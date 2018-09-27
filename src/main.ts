@@ -9,7 +9,6 @@ async function bootstrap() {
     .setTitle('Bootcamp API')
     .setDescription('The only API you need to master the bootcamp.')
     .setVersion('1.0')
-    .addTag('tasks')
     .build();
 
   const document = SwaggerModule.createDocument(app, options);

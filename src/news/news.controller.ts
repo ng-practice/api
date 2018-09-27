@@ -3,7 +3,7 @@ import { ApiUseTags, ApiImplicitBody, ApiOperation } from '@nestjs/swagger';
 import { NewsService } from './lib/news.service';
 import { Article } from './models';
 
-@ApiUseTags('News')
+@ApiUseTags('Dashboard / News')
 @Controller('news')
 export class NewsController {
   constructor(private _news: NewsService) {}

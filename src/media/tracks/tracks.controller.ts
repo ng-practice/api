@@ -1,8 +1,8 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
-import { ApiOperation, ApiUseTags } from '@nestjs/swagger';
+import { ApiImplicitParam, ApiOperation, ApiUseTags } from '@nestjs/swagger';
 import { TracksService } from '../lib';
 
-@ApiUseTags('Tracks')
+@ApiUseTags('Dashboard / Tracks')
 @Controller('tracks')
 export class TracksController {
   constructor(private _tracks: TracksService) {}
@@ -13,7 +13,12 @@ export class TracksController {
   }
 
   @Get(':ids')
-  single(@Param('ids') idsQuery: string) {
+  @ApiImplicitParam({
+    name: 'ids',
+    type: 'string',
+    description: 'Example: /tracks/1,2,3'
+  })
+  singles(@Param('ids') idsQuery: string) {
     const ids = idsQuery.split(',').map(id => +id);
     return this._tracks.loadTracksByIds(ids);
   }

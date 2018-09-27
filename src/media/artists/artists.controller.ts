@@ -3,7 +3,7 @@ import { ApiOperation, ApiUseTags } from '@nestjs/swagger';
 import { ArtistsService } from '../lib';
 import { Artist } from '../models';
 
-@ApiUseTags('Artists')
+@ApiUseTags('Dashboard / Artists')
 @Controller('artists')
 export class ArtistsController {
   constructor(private _artists: ArtistsService) {}

@@ -2,7 +2,7 @@ import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ApiOperation, ApiUseTags } from '@nestjs/swagger';
 import { AlbumService } from '../lib';
 
-@ApiUseTags('Albums')
+@ApiUseTags('Dashboard / Albums')
 @Controller('albums')
 export class AlbumsController {
   constructor(private _albums: AlbumService) {}
