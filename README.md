@@ -9,6 +9,13 @@ lösen.
 2.  Chat API
 3.  Dashboard API
 
+## Contents
+
+- [Setup](#installation-und-start)
+- [Dokumentation](#dokumentation)
+  - [Swagger](#http)
+  - [Websocket](#websocket)
+
 ## Installation und Start
 
 Bitte lade die Bootcamp API herunter und installiere sie, wie im folgenden
