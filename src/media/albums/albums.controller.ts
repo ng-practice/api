@@ -1,5 +1,5 @@
-import { Body, Controller, Post, Get, All, Param } from '@nestjs/common';
-import { ApiUseTags } from '@nestjs/swagger';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { ApiOperation, ApiUseTags } from '@nestjs/swagger';
 import { AlbumService } from '../lib';
 
 @ApiUseTags('Albums')
@@ -18,6 +18,10 @@ export class AlbumsController {
   }
 
   @Post('/import')
+  @ApiOperation({
+    title: 'Import - You can ignore this operation 😴',
+    description: 'This operation is used to migrate articles from an older API.'
+  })
   import(@Body() albumsRaw: any[]) {
     albumsRaw.forEach(raw =>
       this._albums.upsert({

@@ -1,8 +1,7 @@
-import { Body, Controller, Get, Post, All, Param } from '@nestjs/common';
-import { ApiExcludeEndpoint, ApiUseTags } from '@nestjs/swagger';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { ApiOperation, ApiUseTags } from '@nestjs/swagger';
 import { ArtistsService } from '../lib';
 import { Artist } from '../models';
-import { single } from 'rxjs/operators';
 
 @ApiUseTags('Artists')
 @Controller('artists')
@@ -20,6 +19,10 @@ export class ArtistsController {
   }
 
   @Post('/import')
+  @ApiOperation({
+    title: 'Import - You can ignore this operation 😴',
+    description: 'This operation is used to migrate articles from an older API.'
+  })
   import(@Body() artists: Artist[]) {
     artists.forEach(artist => this._artists.upsert(artist));
   }

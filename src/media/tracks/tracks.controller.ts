@@ -1,5 +1,5 @@
-import { Body, Controller, Get, Post, Param } from '@nestjs/common';
-import { ApiUseTags } from '@nestjs/swagger';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { ApiOperation, ApiUseTags } from '@nestjs/swagger';
 import { TracksService } from '../lib';
 
 @ApiUseTags('Tracks')
@@ -19,6 +19,10 @@ export class TracksController {
   }
 
   @Post('/import')
+  @ApiOperation({
+    title: 'Import - You can ignore this operation 😴',
+    description: 'This operation is used to migrate articles from an older API.'
+  })
   import(@Body() tracksRaw: any[]) {
     tracksRaw.forEach(raw =>
       this._tracks.upsert({
