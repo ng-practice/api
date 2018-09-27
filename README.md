@@ -39,9 +39,9 @@ Die RESTful APIs _Taskboard_ und _Dashboard_ wurden mit
 [Swagger](https://swagger.io/) dokumentiert. Nach dem starten der API befindet
 sich unter http://localhost:3000/api/ eine interaktive Dokumentation.
 
-### Websocket
+![Swagger Documentation](assets/images/swagger-docs.png)
 
-![Web-Socket-Basic](assets/images/one-to-one.png)
+### Websocket
 
 Die Chat-API wird durch eine Websocket-Verbindung genutzt.
 Das obige Bild zeigt, wie Client und WebSocket miteinander kommunizieren.
@@ -53,6 +53,8 @@ Wenn der Client eine Nachricht an einen WebSocket-Endpunkt sendet spricht mann
 von einem `Fire & Forget`, weil der Client nicht direkt auf eine Antwort wartet.
 Der Client kann allerdings bestimmte Nachrichten-Typen vom Server abonnieren
 und verarbeiten, sobald sie eintreffen.
+
+![Web-Socket-Basic](assets/images/one-to-one.png)
 
 #### Mit Websocket API verbinden
 
