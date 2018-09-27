@@ -13,6 +13,9 @@ export class Task {
   @ApiModelProperty({ required: false, example: false })
   isComplete: boolean;
 
+  @ApiModelProperty({ required: false, example: false })
+  isInProgress: boolean;
+
   @ApiModelProperty({ required: false, example: true })
   isFavorite: boolean;
 }

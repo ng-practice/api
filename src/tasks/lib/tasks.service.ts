@@ -35,7 +35,11 @@ export class TasksService {
   constructor(private _taskDb: JsonDB) {}
 
   addOne(task: Task) {
-    this._taskDb.push(`/${task.guid}`, task);
+    this._taskDb.push(`/${task.guid}`, {
+      ...task,
+      isInProgress: false,
+      isComplete: false
+    });
   }
 
   getAll(): Task[] {
@@ -59,11 +63,19 @@ export class TasksService {
   }
 
   complete(guid: string) {
-    this._taskDb.push(`/${guid}`, { isComplete: true }, false);
+    this._taskDb.push(
+      `/${guid}`,
+      { isComplete: true, isInProgress: false },
+      false
+    );
   }
 
   proceed(guid: string) {
-    this._taskDb.push(`/${guid}`, { isComplete: false }, false);
+    this._taskDb.push(
+      `/${guid}`,
+      { isInProgress: false, isComplete: false },
+      false
+    );
   }
 
   favor(guid: string) {
