@@ -9,10 +9,13 @@ import {
   Put,
   UseGuards
 } from '@nestjs/common';
-
-import { ApiUseTags } from '../../node_modules/@nestjs/swagger';
+import {
+  ApiImplicitBody,
+  ApiUseTags
+} from '../../node_modules/@nestjs/swagger';
 import { GuidGuard } from './lib/guards/guid.guard';
 import { TasksService } from './lib/tasks.service';
+import { Task } from './models/task';
 
 function bailOut(err: HttpException) {
   throw err;
@@ -38,7 +41,8 @@ export class TasksController {
   }
 
   @Post()
-  create(@Body() task) {
+  @ApiImplicitBody({ name: 'Task' })
+  create(@Body() task: Task) {
     return this._tasks.addOne(task);
   }
 
