@@ -1,6 +1,12 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
-import { ApiImplicitParam, ApiOperation, ApiUseTags } from '@nestjs/swagger';
+import {
+  ApiImplicitBody,
+  ApiImplicitParam,
+  ApiOperation,
+  ApiUseTags
+} from '@nestjs/swagger';
 import { TracksService } from '../lib';
+import { Track, TrackFromOldApi, AlbumFromOldApi } from '../models';
 
 @ApiUseTags('Dashboard / Tracks')
 @Controller('tracks')
@@ -23,12 +29,19 @@ export class TracksController {
     return this._tracks.loadTracksByIds(ids);
   }
 
+  @Post()
+  @ApiImplicitBody({ name: 'Track' })
+  create(@Body() track: Track) {
+    return this._tracks.upsert(track);
+  }
+
   @Post('/import')
   @ApiOperation({
     title: 'Import - You can ignore this operation 😴',
     description: 'This operation is used to migrate articles from an older API.'
   })
-  import(@Body() tracksRaw: any[]) {
+  @ApiImplicitBody({ name: 'AlbumFromOldApi', type: AlbumFromOldApi })
+  import(@Body() tracksRaw: TrackFromOldApi[]) {
     tracksRaw.forEach(raw =>
       this._tracks.upsert({
         id: raw.id,

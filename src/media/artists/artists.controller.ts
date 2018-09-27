@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
-import { ApiOperation, ApiUseTags } from '@nestjs/swagger';
+import { ApiImplicitBody, ApiOperation, ApiUseTags } from '@nestjs/swagger';
 import { ArtistsService } from '../lib';
 import { Artist } from '../models';
 
@@ -18,11 +18,18 @@ export class ArtistsController {
     return this._artists.loadSingle(id);
   }
 
+  @Post()
+  @ApiImplicitBody({ name: 'Artist' })
+  create(@Body() artist: Artist) {
+    return this._artists.upsert(artist);
+  }
+
   @Post('/import')
   @ApiOperation({
     title: 'Import - You can ignore this operation 😴',
     description: 'This operation is used to migrate articles from an older API.'
   })
+  @ApiImplicitBody({ name: 'Artist', type: Artist })
   import(@Body() artists: Artist[]) {
     artists.forEach(artist => this._artists.upsert(artist));
   }

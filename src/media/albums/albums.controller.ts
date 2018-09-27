@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
-import { ApiOperation, ApiUseTags } from '@nestjs/swagger';
+import { ApiImplicitBody, ApiOperation, ApiUseTags } from '@nestjs/swagger';
 import { AlbumService } from '../lib';
+import { Album, AlbumFromOldApi } from '../models';
 
 @ApiUseTags('Dashboard / Albums')
 @Controller('albums')
@@ -8,7 +9,7 @@ export class AlbumsController {
   constructor(private _albums: AlbumService) {}
 
   @Get()
-  all() {
+  all(): Album[] {
     return this._albums.loadAll();
   }
 
@@ -17,12 +18,19 @@ export class AlbumsController {
     return this._albums.loadSingle(id);
   }
 
+  @Post()
+  @ApiImplicitBody({ name: 'Album' })
+  create(@Body() album: Album) {
+    return this._albums.upsert(album);
+  }
+
   @Post('/import')
   @ApiOperation({
     title: 'Import - You can ignore this operation 😴',
     description: 'This operation is used to migrate articles from an older API.'
   })
-  import(@Body() albumsRaw: any[]) {
+  @ApiImplicitBody({ name: 'AlbumFromOldApi', type: AlbumFromOldApi })
+  import(@Body() albumsRaw: AlbumFromOldApi[]) {
     albumsRaw.forEach(raw =>
       this._albums.upsert({
         id: raw.id,

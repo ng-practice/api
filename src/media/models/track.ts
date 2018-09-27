@@ -2,7 +2,7 @@ import { ApiModelProperty } from '@nestjs/swagger';
 
 export class Track {
   @ApiModelProperty({ required: true, example: 7001 })
-  id: string;
+  id: number;
 
   @ApiModelProperty({ required: true, example: 8001 })
   albumId: number;
