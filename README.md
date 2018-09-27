@@ -13,8 +13,8 @@ lösen.
 
 - [Setup](#installation-und-start)
 - [Dokumentation](#dokumentation)
-  - [Swagger](#http)
-  - [Websocket](#websocket)
+  - ☁️ [HTTP API](#http)
+  - 🔌 [Websocket API](#websocket)
 
 ## Installation und Start
 
