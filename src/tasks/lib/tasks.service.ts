@@ -73,7 +73,7 @@ export class TasksService {
   proceed(guid: string) {
     this._taskDb.push(
       `/${guid}`,
-      { isInProgress: false, isComplete: false },
+      { isInProgress: true, isComplete: false },
       false
     );
   }
