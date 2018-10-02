@@ -13,9 +13,9 @@ export class AlbumService {
   }
 
   loadSingle(id: number): any {
-    const artist = this._albumsDb.getData(`/${id}`);
-    artist.albums = this._tracks.loadByAlbum(artist.id);
-    return artist;
+    const album = this._albumsDb.getData(`/${id}`);
+    album.tracks = this._tracks.loadByAlbum(album.id);
+    return album;
   }
 
   loadByArtist(id: number): Album[] {
