@@ -12,6 +12,7 @@ lösen.
 ## Contents
 
 - [Setup](#installation-und-start)
+- [Update](#update)
 - [Dokumentation](#dokumentation)
   - ☁️ [HTTP API](#http)
   - 🔌 [Websocket API](#websocket)
@@ -36,6 +37,18 @@ npm install
 
 # API starten
 npm start
+```
+
+## Update
+
+Wenn diese API Aktualisierungen oder Bugfixes erfährt, kannst du diese wie
+folgt beziehen.
+
+```bash
+cd bootcamp-api
+git reset --hard # Setzt "database/" zurück
+git pull         # Lädt Änderungen herunter
+npm ci           # Installiert ggf. neue Pakete
 ```
 
 ## Dokumentation
