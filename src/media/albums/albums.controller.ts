@@ -19,7 +19,7 @@ export class AlbumsController {
   }
 
   @Post()
-  @ApiImplicitBody({ name: 'Album' })
+  @ApiImplicitBody({ name: 'Album', type: Album })
   create(@Body() album: Album) {
     return this._albums.upsert(album);
   }

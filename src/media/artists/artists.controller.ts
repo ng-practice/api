@@ -19,7 +19,7 @@ export class ArtistsController {
   }
 
   @Post()
-  @ApiImplicitBody({ name: 'Artist' })
+  @ApiImplicitBody({ name: 'Artist', type: Artist })
   create(@Body() artist: Artist) {
     return this._artists.upsert(artist);
   }
