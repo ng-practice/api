@@ -174,3 +174,16 @@ benachrichtigt, dass es nun keine Nachrichten mehr gibt.
 | ----------- | ---------------------------------------------- |
 | **Anfrage** | `'[Chat:Client] Remove messages from history'` |
 | **Antwort** | `'[Chat] All past messages have been loaded'`  |
+
+## Development
+
+### API mit Auto-Reload starten
+
+```bash
+npm run start:dev
+```
+
+> Auf Mac konnte beobachtet werden, dass manchmal Port 3000 beim Neustart
+> vergeben ist und die alte API-Instanz nicht richtig geschlossen wird.
+> Um Port 3000 wieder freizumachen kann auf Mac folgender Command genutzt werden:
+> **`kill $(lsof -t -i :3000)`**
