@@ -26,7 +26,16 @@ export class MissingGuid extends BadRequestException {
 
 export class NoTaskFound extends NotFoundException {
   constructor(givenGuid: string) {
-    super(`Could not find task having the identifier "${givenGuid}".`);
+    super(`Can not find task having the identifier "${givenGuid}".`);
+  }
+}
+
+export class MalformedTask extends NotFoundException {
+  constructor() {
+    super(
+      'Can not create task. Please provide a single task object having ' +
+        'at least a "guid" and a "title".'
+    );
   }
 }
 
@@ -34,12 +43,17 @@ export class NoTaskFound extends NotFoundException {
 export class TasksService {
   constructor(private _taskDb: JsonDB) {}
 
-  addOne(task: Task) {
-    this._taskDb.push(`/${task.guid}`, {
-      ...task,
-      isInProgress: false,
-      isComplete: false
-    });
+  addOne(task: Task): Either<HttpException, Task> {
+    task = task || ({} as Task);
+
+    return Maybe.of(task.guid)
+      .toEither(new MalformedTask())
+      .chain(() =>
+        tryTo<Task>({
+          resolve: () => this._writeTask(task),
+          orYield: () => new MalformedTask()
+        })
+      );
   }
 
   getAll(): Task[] {
@@ -88,5 +102,15 @@ export class TasksService {
 
   remove(guid: string) {
     return this.getSingle(guid).ifRight(() => this._taskDb.delete(`/${guid}`));
+  }
+
+  private _writeTask(task: Task): Task {
+    this._taskDb.push(`/${task.guid}`, {
+      ...task,
+      isInProgress: false,
+      isComplete: false
+    });
+
+    return task;
   }
 }
