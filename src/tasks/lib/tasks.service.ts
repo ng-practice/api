@@ -1,43 +1,11 @@
-import {
-  BadRequestException,
-  HttpException,
-  Injectable,
-  NotFoundException
-} from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import JsonDB from 'node-json-db';
 import { Either } from 'pure-ts/adts/Either';
 import { Maybe } from 'pure-ts/adts/Maybe';
-
 import { Task } from '../models/task';
 import { TasksJsonDB } from '../models/tasks-json-db';
-
-function tryTo<T>(action: {
-  resolve: () => T;
-  orYield: (err: Error) => HttpException;
-}): Either<HttpException, T> {
-  return Either.encase(action.resolve).mapLeft(action.orYield);
-}
-
-export class MissingGuid extends BadRequestException {
-  constructor() {
-    super('Please provide a valid Guid.');
-  }
-}
-
-export class NoTaskFound extends NotFoundException {
-  constructor(givenGuid: string) {
-    super(`Can not find task having the identifier "${givenGuid}".`);
-  }
-}
-
-export class MalformedTask extends NotFoundException {
-  constructor() {
-    super(
-      'Can not create task. Please provide a single task object having ' +
-        'at least a "guid" and a "title".'
-    );
-  }
-}
+import { MalformedTask, MissingGuid, NoTaskFound } from './errors';
+import { tryTo } from './utils';
 
 @Injectable()
 export class TasksService {
@@ -70,10 +38,6 @@ export class TasksService {
           orYield: () => new NoTaskFound(guid)
         })
       );
-  }
-
-  create(task: Task) {
-    this._taskDb.push(`/${task.guid}`, task);
   }
 
   complete(guid: string) {
