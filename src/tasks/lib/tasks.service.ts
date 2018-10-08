@@ -18,7 +18,20 @@ export class TasksService {
       .toEither(new MalformedTask())
       .chain(() =>
         tryTo<Task>({
-          resolve: () => this._writeTask(task),
+          resolve: () => this._create(task),
+          orYield: () => new MalformedTask()
+        })
+      );
+  }
+
+  updateOne(task: Task): Either<HttpException, Task> {
+    task = task || ({} as Task);
+
+    return Maybe.of(task.guid)
+      .toEither(new MalformedTask())
+      .chain(() =>
+        tryTo<Task>({
+          resolve: () => this._update(task),
           orYield: () => new MalformedTask()
         })
       );
@@ -68,13 +81,18 @@ export class TasksService {
     return this.getSingle(guid).ifRight(() => this._taskDb.delete(`/${guid}`));
   }
 
-  private _writeTask(task: Task): Task {
+  private _create(task: Task): Task {
     this._taskDb.push(`/${task.guid}`, {
       ...task,
       isInProgress: false,
       isComplete: false
     });
 
+    return task;
+  }
+
+  private _update(task: Task): Task {
+    this._taskDb.push(`/${task.guid}`, task);
     return task;
   }
 }

@@ -49,6 +49,15 @@ export class TasksController {
       .extract();
   }
 
+  @Put()
+  @ApiImplicitBody({ name: 'Task', type: Task })
+  update(@Body() task: Task) {
+    return this._tasks
+      .updateOne(task)
+      .ifLeft(bailOut)
+      .extract();
+  }
+
   @Delete(':guid?')
   @UseGuards(GuidGuard)
   remove(@Param('guid') guid: string) {
