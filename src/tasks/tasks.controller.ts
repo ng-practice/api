@@ -41,7 +41,7 @@ export class TasksController {
   }
 
   @Post()
-  @ApiImplicitBody({ name: 'Task' })
+  @ApiImplicitBody({ name: 'Task', type: Task })
   create(@Body() task: Task) {
     return this._tasks.addOne(task);
   }
