@@ -1,13 +1,17 @@
-import { Body, Controller, Post } from '@nestjs/common';
-import { ApiUseTags, ApiImplicitBody, ApiOperation } from '@nestjs/swagger';
+import { Body, Controller, Get, Post } from '@nestjs/common';
+import { ApiImplicitBody, ApiOperation, ApiUseTags } from '@nestjs/swagger';
 import { NewsService } from './lib/news.service';
 import { Article } from './models';
-import { Track } from 'media/models';
 
 @ApiUseTags('Dashboard / News')
 @Controller('news')
 export class NewsController {
   constructor(private _news: NewsService) {}
+
+  @Get()
+  getAll() {
+    return this._news.loadAll();
+  }
 
   @Post()
   @ApiImplicitBody({ name: 'Article', type: Article })

@@ -8,12 +8,12 @@ const JsonDB = require('node-json-db');
 const database = join(__dirname, '..', '..', 'database', 'dashboard', 'news');
 
 @Module({
+  controllers: [NewsController],
   providers: [
     {
       provide: NewsService,
       useValue: new NewsService(new JsonDB(`${database}/news`, true, true))
     }
-  ],
-  controllers: [NewsController]
+  ]
 })
 export class NewsModule {}

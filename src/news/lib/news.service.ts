@@ -6,6 +6,11 @@ import { Article } from '../models';
 export class NewsService {
   constructor(private _newsDb: JsonDB) {}
 
+  loadAll(): Article[] {
+    const all = this._newsDb.getData('/');
+    return Object.values(all);
+  }
+
   upsert(article: Article) {
     this._newsDb.push(`/${article.id}`, article);
   }
