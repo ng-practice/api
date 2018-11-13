@@ -1,7 +1,7 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import JsonDB from 'node-json-db';
-import { Either } from 'pure-ts/adts/Either';
-import { Maybe } from 'pure-ts/adts/Maybe';
+import { Either } from 'purify-ts/adts/Either';
+import { Maybe } from 'purify-ts/adts/Maybe';
 import { Task } from '../models/task';
 import { TasksJsonDB } from '../models/tasks-json-db';
 import { MalformedTask, MissingGuid, NoTaskFound } from './errors';

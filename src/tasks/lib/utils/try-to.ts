@@ -1,5 +1,5 @@
 import { HttpException } from '@nestjs/common';
-import { Either } from 'pure-ts/adts/Either';
+import { Either } from 'purify-ts/adts/Either';
 
 export function tryTo<T>(action: {
   resolve: () => T;
