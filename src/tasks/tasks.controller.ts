@@ -49,7 +49,8 @@ export class TasksController {
       .extract();
   }
 
-  @Put()
+  @Put(':guid?')
+  @UseGuards(GuidGuard)
   @ApiImplicitBody({ name: 'Task', type: Task })
   update(@Body() task: Task) {
     return this._tasks
