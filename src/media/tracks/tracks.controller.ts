@@ -30,6 +30,10 @@ export class TracksController {
   }
 
   @Post()
+  @ApiOperation({
+    title: 'Import - You can ignore this operation 😴',
+    description: 'This operation is used to migrate articles from an older API.'
+  })
   @ApiImplicitBody({ name: 'Track', type: Track })
   create(@Body() track: Track) {
     return this._tracks.upsert(track);

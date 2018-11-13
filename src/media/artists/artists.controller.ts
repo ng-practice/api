@@ -19,6 +19,10 @@ export class ArtistsController {
   }
 
   @Post()
+  @ApiOperation({
+    title: 'Import - You can ignore this operation 😴',
+    description: 'This operation is used to migrate articles from an older API.'
+  })
   @ApiImplicitBody({ name: 'Artist', type: Artist })
   create(@Body() artist: Artist) {
     return this._artists.upsert(artist);

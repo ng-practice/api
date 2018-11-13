@@ -14,6 +14,10 @@ export class NewsController {
   }
 
   @Post()
+  @ApiOperation({
+    title: 'Import - You can ignore this operation 😴',
+    description: 'This operation is used to migrate articles from an older API.'
+  })
   @ApiImplicitBody({ name: 'Article', type: Article })
   create(@Body() article: Article) {
     this._news.upsert(article);
