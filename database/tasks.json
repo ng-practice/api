@@ -1,1 +1,8 @@
-{}
+{
+  "1": {
+    "guid": 1,
+    "isInProgress": false,
+    "isComplete": false,
+    "title": "My Update 1"
+  }
+}

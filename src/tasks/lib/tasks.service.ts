@@ -24,14 +24,15 @@ export class TasksService {
       );
   }
 
-  updateOne(task: Task): Either<HttpException, Task> {
-    task = task || ({} as Task);
+  updateOne(updated: Task): Either<HttpException, Task> {
+    updated = updated || ({} as Task);
+    const fromStorage = this.getSingle(updated.guid).orDefault({} as Task);
 
-    return Maybe.of(task.guid)
+    return Maybe.of(updated.guid)
       .toEither(new MalformedTask())
       .chain(() =>
         tryTo<Task>({
-          resolve: () => this._update(task),
+          resolve: () => this._update(fromStorage, updated),
           orYield: () => new MalformedTask()
         })
       );
@@ -91,8 +92,8 @@ export class TasksService {
     return task;
   }
 
-  private _update(task: Task): Task {
-    this._taskDb.push(`/${task.guid}`, task);
-    return task;
+  private _update(origin: Task, updated: Task): Task {
+    this._taskDb.push(`/${updated.guid}`, { ...origin, ...updated });
+    return updated;
   }
 }
